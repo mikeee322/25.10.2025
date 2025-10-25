@@ -3,13 +3,20 @@
 bool isPyth(unsigned a, unsigned b, unsigned c);
 
 bool isMax(unsigned a, unsigned b, unsigned c){
-  bool m = a > a*a + b*b;
-  m = m || b > a*a + b*b;
-  m = m || a > a*a + c*c;
-  m = m || c > a*a + c*c;
-  m = m || b > b*b + c*c;
-  m = m || c > b*b + c*c;
-  return m;
+	bool m = a*a > a*a + b*b;
+	m = m || b*b > a*a + b*b;
+	m = m || a*a > a*a + c*c;
+	m = m || c*c > a*a + c*c;
+	m = m || b*b > b*b + c*c;
+	m = m || c*c > b*b + c*c;
+	return m;
+}
+
+bool IsSquare(unsigned a, unsigned b, unsigned c){
+	bool s = a > a*a;
+	s = s || b > b*b;
+	s = s || c > c*c;
+	return s;
 }
 
 int main(){
@@ -22,9 +29,9 @@ int main(){
     c=b;
     b=a;
   }
-  if(std::cin.eof() && isMax){
-    std::cerr << "crossing the limit\n";
-    return 2;
+  if((std::cin.eof() && isMax(a, b, c) && isPyth(a, b, c)) || (std::cin.eof() && IsSquare(a, b, c) && isPyth(a, b, c))){
+	std::cerr << "crossing the limit\n";
+	return 2;
   }
   if(std::cin.eof()){
     std::cout << count;
